@@ -1,4 +1,4 @@
-racdroid
-========
+Resizable Rectangle Overlay
+===========================
 
 Resizable Overlay
