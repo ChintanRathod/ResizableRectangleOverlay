@@ -30,8 +30,8 @@ public class ColorBall {
 	int id;
 	static int count = 0;
 
-	public ColorBall(Context context, int resourceId, Point point) {
-		this.id = count++;
+	public ColorBall(Context context, int resourceId, Point point, int id) {
+		this.id = id;
 		bitmap = BitmapFactory.decodeResource(context.getResources(),
 				resourceId);
 		mContext = context;
@@ -68,5 +68,13 @@ public class ColorBall {
 
 	public void setY(int y) {
 		point.y = y;
+	}
+
+	public void addY(int y){
+		point.y = point.y + y;
+	}
+
+	public void addX(int x){
+		point.x = point.x + x;
 	}
 }
