@@ -35,12 +35,13 @@ public class DrawView extends View {
 
     Point point1, point3;
     Point point2, point4;
+    Point startMovePoint;
 
     /**
      * point1 and point 3 are of same group and same as point 2 and point4
      */
-    int groupId = -1;
-    private ArrayList<ColorBall> colorballs = new ArrayList<ColorBall>();
+    int groupId = 2;
+    private ArrayList<ColorBall> colorballs;
     // array that holds the balls
     private int balID = 0;
     // variable to know what ball is being dragged
@@ -49,32 +50,7 @@ public class DrawView extends View {
 
     public DrawView(Context context) {
         super(context);
-        paint = new Paint();
-        setFocusable(true); // necessary for getting the touch events
-        canvas = new Canvas();
-        // setting the start point for the balls
-        point1 = new Point();
-        point1.x = 50;
-        point1.y = 20;
-
-        point2 = new Point();
-        point2.x = 150;
-        point2.y = 20;
-
-        point3 = new Point();
-        point3.x = 150;
-        point3.y = 120;
-
-        point4 = new Point();
-        point4.x = 50;
-        point4.y = 120;
-
-        // declare each ball with the ColorBall class
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point1));
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point2));
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point3));
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point4));
-
+        init();
     }
 
     public DrawView(Context context, AttributeSet attrs, int defStyle) {
@@ -83,6 +59,10 @@ public class DrawView extends View {
 
     public DrawView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
+    }
+    
+    private void init(Context context) {
         paint = new Paint();
         setFocusable(true); // necessary for getting the touch events
         canvas = new Canvas();
@@ -104,11 +84,11 @@ public class DrawView extends View {
         point4.y = 120;
 
         // declare each ball with the ColorBall class
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point1));
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point2));
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point3));
-        colorballs.add(new ColorBall(context, R.drawable.gray_circle, point4));
-
+        colorballs = new ArrayList<ColorBall>();
+        colorballs.add(0,new ColorBall(context, R.drawable.gray_circle, point1,0));
+        colorballs.add(1,new ColorBall(context, R.drawable.gray_circle, point2,1));
+        colorballs.add(2,new ColorBall(context, R.drawable.gray_circle, point3,2));
+        colorballs.add(3,new ColorBall(context, R.drawable.gray_circle, point4,3));
     }
 
     // the method that draws the balls
@@ -160,7 +140,7 @@ public class DrawView extends View {
         case MotionEvent.ACTION_DOWN: // touch down so check if the finger is on
                                         // a ball
             balID = -1;
-            groupId = -1;
+            startMovePoint = new Point(X,Y);
             for (ColorBall ball : colorballs) {
                 // check if inside the bounds of the ball (circle)
                 // get the center for the ball
@@ -217,6 +197,29 @@ public class DrawView extends View {
                 }
 
                 invalidate();
+            }else{
+                if (startMovePoint!=null) {
+                    paint.setColor(Color.CYAN);
+                    int diffX = X - startMovePoint.x;
+                    int diffY = Y - startMovePoint.y;
+                    startMovePoint.x = X;
+                    startMovePoint.y = Y;
+                    colorballs.get(0).addX(diffX);
+                    colorballs.get(1).addX(diffX);
+                    colorballs.get(2).addX(diffX);
+                    colorballs.get(3).addX(diffX);
+                    colorballs.get(0).addY(diffY);
+                    colorballs.get(1).addY(diffY);
+                    colorballs.get(2).addY(diffY);
+                    colorballs.get(3).addY(diffY);
+                    if(groupId==1)
+                        canvas.drawRect(point1.x, point3.y, point3.x, point1.y,
+                                paint);
+                    else
+                        canvas.drawRect(point2.x, point4.y, point4.x, point2.y,
+                                paint);
+                    invalidate();
+                }
             }
 
             break;
