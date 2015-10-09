@@ -1,9 +1,7 @@
 Resizable Rectangle Overlay
 ===========================
 
-Resizable Overlay
-
-When I read this question [How to create a resizable rectangle with user touch events on Android?!](http://stackoverflow.com/questions/8974088/how-to-create-a-resizable-rectangle-with-user-touch-events-on-android)  on StackOverFlow, I tried to develop a custom control overlay which behaves like below.
+When I read this question [How to create a resizable rectangle with user touch events on Android?](http://stackoverflow.com/questions/8974088/how-to-create-a-resizable-rectangle-with-user-touch-events-on-android)  on StackOverFlow, I tried to develop a custom control overlay which behaves like below.
 
 ![First Fragment](http://i.stack.imgur.com/cajl4.jpg)
 
