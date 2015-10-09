@@ -3,9 +3,17 @@ Resizable Rectangle Overlay
 
 Resizable Overlay
 
-When I read this question  http://stackoverflow.com/questions/8974088/how-to-create-a-resizable-rectangle-with-user-touch-events-on-android on StackOverFlow, I tried to develop a custom control overlay which behaves like it.
+When I read this question [How to create a resizable rectangle with user touch events on Android?!](http://stackoverflow.com/questions/8974088/how-to-create-a-resizable-rectangle-with-user-touch-events-on-android)  on StackOverFlow, I tried to develop a custom control overlay which behaves like below.
 
-Current sample application will do only overlay on image. This will not crop image or do other operation. Other operations will be added soon in next versions.
+![First Fragment](http://i.stack.imgur.com/cajl4.jpg)
+
+**What this sample do?**
+
+Current sample application will do only overlay on image. 
+
+**What this sample can't do?**
+
+This will not crop image or do other operation. Other operations will be added soon in next versions.
 
 To use custom control in your application, write following code in your layout file.
 
